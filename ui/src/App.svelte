@@ -1,5 +1,6 @@
 <script lang="ts">
   import api from "./api/api";
+  import WorkShift from "./api/types";
   import Toasts from "./components/Toasts.svelte";
   import { showToast } from "./stores/toasts";
 
@@ -38,17 +39,17 @@
   async function onSubmit(e: Event) {
     e.preventDefault();
 
-    const payload = {
-      startDate,
-      beginAt,
-      finishedAt,
-      bid,
-      workedHours,
-      workShiftSalary,
-    };
+   const payload: WorkShift = {
+     startDate,
+     beginAt,
+     finishedAt,
+     bid,
+     workedHours,
+     workShiftSalary,
+   }
 
      let result = await api.post("workshifts", payload);
-    showToast("Saved Work {result}" );
+    showToast(`Saved Work ${result}`)
     // onsaved(user);
   }
 </script>
