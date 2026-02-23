@@ -29,12 +29,13 @@
   }
 
   function onSaved(): void {}
+
   function parseTimeToMinutes(time: string): number {
     const [h, m] = time.split(":").map(Number);
     return h * 60 + m;
   }
 
-  function onSubmit(e: Event) {
+  async function onSubmit(e: Event) {
     e.preventDefault();
 
     const payload = {
@@ -46,8 +47,8 @@
       workShiftSalary,
     };
 
-    // let result = await api.post("workshifts", payload);
-    showToast("Saved Work");
+     let result = await api.post("workshifts", payload);
+    showToast("Saved Work {result}" );
     // onsaved(user);
   }
 </script>

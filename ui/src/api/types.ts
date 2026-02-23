@@ -2,6 +2,8 @@
 // TODO export type Id<T extends Entity<T>> = number & {_of?: T}
 export type Entity<T extends Entity<T>> = {id: Id<T>}
 
+// class calculator.workshift.WorkShift
+export interface WorkShift {beginAt: string; bid: number; finishedAt: string; startDate: string; workShiftSalary: number; workedHours: number}
 
 // class java.time.DayOfWeek
 export enum DayOfWeek {MONDAY = 'MONDAY', TUESDAY = 'TUESDAY', WEDNESDAY = 'WEDNESDAY', THURSDAY = 'THURSDAY', FRIDAY = 'FRIDAY', SATURDAY = 'SATURDAY', SUNDAY = 'SUNDAY'}
