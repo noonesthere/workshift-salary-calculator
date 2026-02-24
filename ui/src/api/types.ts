@@ -3,7 +3,11 @@
 export type Entity<T extends Entity<T>> = {id: Id<T>}
 
 // class calculator.workshift.WorkShift
-export interface WorkShift {beginAt: string; bid: number; finishedAt: string; startDate: string; workShiftSalary: number; workedHours: number}
+export interface WorkShift {beginAt: LocalTime; bid: number; finishedAt: LocalTime; id: TSID<WorkShift>; startDate: LocalDate; workShiftSalary: number; workedHours: number}
 
+// java.time.LocalDate
+export type LocalDate = `${number}-${number}-${number}`
+// java.time.LocalTime
+export type LocalTime = `${number}:${number}`|`${number}:${number}:${number}`
 // class java.time.DayOfWeek
 export enum DayOfWeek {MONDAY = 'MONDAY', TUESDAY = 'TUESDAY', WEDNESDAY = 'WEDNESDAY', THURSDAY = 'THURSDAY', FRIDAY = 'FRIDAY', SATURDAY = 'SATURDAY', SUNDAY = 'SUNDAY'}

@@ -9,7 +9,6 @@ import java.nio.file.Path
 import kotlin.io.path.exists
 import kotlin.reflect.full.primaryConstructor
 
-
 val assetsPath = Path.of("ui/dist").takeIf { it.exists() } ?: Path.of("ui/public")
 
 fun startServer() = Server(
