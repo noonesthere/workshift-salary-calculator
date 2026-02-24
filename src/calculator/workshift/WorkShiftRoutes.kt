@@ -2,10 +2,8 @@ package calculator.workshift
 
 import klite.annotations.POST
 
-class WorkShiftRoutes {
+class WorkShiftRoutes(private val workShiftRepository: WorkShiftRepository) {
 
   @POST
-  fun save(workshift: WorkShift): WorkShift {
-    return workshift
-  }
+  fun save(workshift: WorkShift): WorkShift = workshift.also { workShiftRepository.save(it) }
 }
