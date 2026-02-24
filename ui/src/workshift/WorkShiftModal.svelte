@@ -32,13 +32,25 @@
 <dialog
   bind:this={dialog}
   onclose={handleClose}
-  class="rounded-2xl p-0 shadow-xl w-full max-w-xl"
+  class="p-0 rounded-2xl shadow-xl w-full max-w-xl"
 >
   <WorkShiftForm {onSave} />
 </dialog>
 
 <style>
+  dialog {
+    border: none;
+    padding: 0;
+    margin: auto;
+  }
+
+  dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
   dialog::backdrop {
     background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
   }
 </style>
