@@ -1,5 +1,11 @@
     <script lang="ts">
-      let {from, to } = $props();
+        let {
+          from = $bindable(),
+          to = $bindable()
+        } = $props<{
+          from: string;
+          to: string;
+        }>();
     </script>
 
     <div>

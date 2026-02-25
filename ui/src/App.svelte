@@ -32,11 +32,16 @@
     modalOpen = false;
   }
 
-  async function handleSave(payload: WorkShift): Promise<void> {
-    await api.post("workshifts", payload);
-    showToast("Зміну збережено");
-    modalOpen = false;
-  }
+  let listRef: any;
+
+ async function handleSave(payload: WorkShift): Promise<void> {
+   const saved = await api.post<WorkShift>("workshifts", payload);
+
+   listRef?.addShift(saved);
+
+   showToast("Зміну збережено");
+   modalOpen = false;
+ }
 </script>
 
 <div class="h-screen flex flex-col bg-gray-100">
@@ -46,7 +51,7 @@
   >
     <h1 class="text-xl font-semibold text-gray-800">Облік робочих змін</h1>
 
-    <PeriodRange {from} {to}/>
+    <PeriodRange bind:from bind:to />
 
     <button
       onclick={openModal}
@@ -64,7 +69,7 @@
 
   <!-- Scrollable List Area -->
   <div class="flex-1 overflow-y-auto p-6">
-    <WorkShiftList {from} {to} />
+    <WorkShiftList bind:this={listRef} {from} {to} />
   </div>
 </div>
 
