@@ -7,12 +7,22 @@
   let loading = $state(true);
   let error = $state<string | null>(null);
 
+  let {from, to} = $props();
+
+
   async function load() {
     loading = true;
     error = null;
 
     try {
-      workShifts = await api.get<WorkShift[]>("workshifts");
+    const params = new URLSearchParams({
+      from,
+      to
+    });
+
+      workShifts = await api.get<WorkShift[]>(
+        `workshifts?${params.toString()}`
+      );
     } catch (e) {
       console.error(e);
       error = "Не вдалося завантажити зміни";
@@ -69,7 +79,7 @@
 
             <!-- Middle -->
             <div class="text-xs text-gray-600 text-center">
-              {shift.workedHours.toFixed(2)} год × {shift.bid}
+              {shift.workedHours.toFixed(2)} год × {shift.bid} грн
             </div>
 
             <!-- Right -->

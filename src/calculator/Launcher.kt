@@ -19,12 +19,10 @@ fun startServer() = Server(
 ).apply {
   use<LiquibaseModule>()
   use<HikariModule>()
-
   use<JsonBody>()
   use<RequestTransactionHandler>()
 
   assets("/", AssetsHandler(assetsPath, useIndexForUnknownPaths = true))
-
 
   context("/api") {
     post("/js-error") { logger("js-error").error(rawBody) }
@@ -34,7 +32,9 @@ fun startServer() = Server(
 
     annotated<WorkShiftRoutes>("/workshifts")
   }
-  org.h2.tools.Server.createWebServer("-web", "-webPort", "8082").start()
+  if (!Config.isProd) {
+    org.h2.tools.Server.createWebServer("-web", "-webPort", "8082").start()
+  }
   start()
 }
 
