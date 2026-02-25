@@ -32,7 +32,6 @@ fun startServer() = Server(
     useHashCodeAsETag()
     useOnly<JsonBody>()
 
-
     annotated<WorkShiftRoutes>("/workshifts")
   }
   org.h2.tools.Server.createWebServer("-web", "-webPort", "8082").start()

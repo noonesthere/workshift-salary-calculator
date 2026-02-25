@@ -53,7 +53,7 @@ tasks.register<Copy>("deps") {
   from(configurations.runtimeClasspath)
 }
 
-val mainClassName = "LauncherKt"
+val mainClassName = "calculator.LauncherKt"
 
 tasks.jar {
   dependsOn("deps")

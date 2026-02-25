@@ -9,5 +9,5 @@ class WorkShiftRoutes(private val workShiftRepository: WorkShiftRepository) {
   fun save(workshift: WorkShift): WorkShift = workshift.also { workShiftRepository.save(it) }
 
   @GET
-  fun all(): List<WorkShift> = workShiftRepository.list(suffix = "order by start_date desc")
+  fun get(): List<WorkShift> = workShiftRepository.list()
 }
