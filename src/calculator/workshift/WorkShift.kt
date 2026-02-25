@@ -17,4 +17,5 @@ data class WorkShift(
   @Column("bid") val bid: Decimal,
   @Column("worked_hours") val workedHours: Decimal,
   @Column("work_shift_salary") val workShiftSalary: Decimal,
+  @Column("included") val included: Boolean = true,
 ) : BaseEntity<WorkShiftId>

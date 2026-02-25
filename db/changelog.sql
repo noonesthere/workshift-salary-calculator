@@ -11,6 +11,7 @@ create table work_shift
   bid               decimal(7, 2) not null,
   worked_hours      decimal(4, 2) not null,
   work_shift_salary decimal(7, 2) not null,
+  included boolean not null,
   constraint pk_work_shift primary key (id)
 );
 

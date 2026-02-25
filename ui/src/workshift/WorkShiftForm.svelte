@@ -125,6 +125,7 @@
         <input
           id="bid"
           type="number"
+          step="0.01"
           bind:value={bid}
           placeholder="0"
           class="w-full rounded-xl border-gray-300 focus:border-primary-500 focus:ring-primary-500"

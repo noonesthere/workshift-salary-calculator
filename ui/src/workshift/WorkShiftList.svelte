@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import api from "../api/api";
   import type { WorkShift } from "../api/types";
+  import WorkShiftRow from "./WorkShiftRow.svelte";
 
   let workShifts = $state<WorkShift[]>([]);
   let loading = $state(true);
@@ -10,14 +11,42 @@
   let {from, to} = $props();
 
   const totalHours = $derived(
-    workShifts.reduce((sum, s) => sum + s.workedHours, 0)
+    workShifts
+      .filter(s => s.included)
+      .reduce((sum, s) => sum + s.workedHours, 0)
   );
 
   const totalSalary = $derived(
-    workShifts.reduce((sum, s) => sum + s.workShiftSalary, 0)
+    workShifts
+      .filter(s => s.included)
+      .reduce((sum, s) => sum + s.workShiftSalary, 0)
   );
 
-  const totalCount = $derived(workShifts.length);
+  const totalCount = $derived(
+    workShifts.filter(s => s.included).length
+  );
+
+  async function toggleIncluded(shift: WorkShift) {
+    const updated = { ...shift, included: !shift.included };
+
+    // Optimistic UI update
+    workShifts = workShifts.map(s =>
+      s.id === shift.id ? updated : s
+    );
+
+    try {
+      await api.patch(`workshifts/${shift.id}`, {
+        included: updated.included
+      });
+    } catch (e) {
+      console.error(e);
+
+      // rollback if failed
+      workShifts = workShifts.map(s =>
+        s.id === shift.id ? shift : s
+      );
+    }
+  }
 
   async function load() {
     loading = true;
@@ -110,35 +139,10 @@
   {:else}
     <div class="grid gap-4">
       {#each workShifts as shift (shift.id)}
-        <div
-          class="bg-white rounded-xl border border-gray-200
-                 px-4 py-3
-                 hover:shadow-sm
-                 transition-all duration-150 cursor-pointer"
-        >
-          <div class="flex justify-between items-center">
-            <!-- Left -->
-            <div class="space-y-0.5">
-              <div class="text-sm font-semibold text-gray-800">
-                {formatDate(shift.startDate)}
-              </div>
-
-              <div class="text-xs text-gray-500">
-                {shift.beginAt} — {shift.finishedAt}
-              </div>
-            </div>
-
-            <!-- Middle -->
-            <div class="text-xs text-gray-600 text-center">
-              {shift.workedHours.toFixed(2)} год × {shift.bid} грн
-            </div>
-
-            <!-- Right -->
-            <div class="text-sm font-semibold text-primary-600">
-              {shift.workShiftSalary.toFixed(2)} грн
-            </div>
-          </div>
-        </div>
+        <WorkShiftRow
+          {shift}
+          onToggle={toggleIncluded}
+        />
       {/each}
     </div>
   {/if}

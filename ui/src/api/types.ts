@@ -2,8 +2,10 @@
 // TODO export type Id<T extends Entity<T>> = number & {_of?: T}
 export type Entity<T extends Entity<T>> = {id: Id<T>}
 
+// class calculator.workshift.PatchBody
+export interface PatchBody {included: boolean}
 // class calculator.workshift.WorkShift
-export interface WorkShift {beginAt: LocalTime; bid: number; finishedAt: LocalTime; id: TSID<WorkShift>; startDate: LocalDate; workShiftSalary: number; workedHours: number}
+export interface WorkShift {beginAt: LocalTime; bid: number; finishedAt: LocalTime; id: TSID<WorkShift>; included: boolean; startDate: LocalDate; workShiftSalary: number; workedHours: number}
 
 // java.time.LocalDate
 export type LocalDate = `${number}-${number}-${number}`
