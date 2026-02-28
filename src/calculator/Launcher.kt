@@ -1,5 +1,7 @@
 package calculator
 
+
+import calculator.workshift.ExportRoutes
 import calculator.workshift.WorkShiftRoutes
 import klite.*
 import klite.annotations.annotated
@@ -23,6 +25,10 @@ fun startServer() = Server(
   use<RequestTransactionHandler>()
 
   assets("/", AssetsHandler(assetsPath, useIndexForUnknownPaths = true))
+
+  context("/export") {
+    annotated<ExportRoutes>()
+  }
 
   context("/api") {
     post("/js-error") { logger("js-error").error(rawBody) }

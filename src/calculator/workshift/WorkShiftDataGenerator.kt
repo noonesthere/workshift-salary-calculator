@@ -14,6 +14,9 @@ object WorkShiftDataGenerator {
 
   private val random = Random(System.currentTimeMillis())
 
+  fun generateList(count: Int = 1_000_000): List<WorkShift> =
+    List(count) { randomShift() }
+
   fun generate(count: Int = 1_000_000): Sequence<WorkShift> = sequence {
     repeat(count) {
       yield(randomShift())

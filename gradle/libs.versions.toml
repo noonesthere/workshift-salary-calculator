@@ -21,5 +21,7 @@ klite-json = { module = "com.github.codeborne.klite:klite-json", version.ref = "
 hikari = { module = "com.zaxxer:HikariCP", version.ref = "hikari" }
 h2 = { module = "com.h2database:h2", version.ref = "h2" }
 snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }
+poi-ooxml = {module = "org.apache.poi:poi-ooxml", version = "5.5.1"}
+poi = {module = "org.apache.poi:poi", version = "5.5.1"}
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "2.3.0" }

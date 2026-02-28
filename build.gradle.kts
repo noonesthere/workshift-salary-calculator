@@ -21,6 +21,8 @@ dependencies {
   implementation(libs.hikari)
   implementation(libs.h2)
   implementation(libs.snakeyaml)
+  implementation(libs.poi)
+  implementation(libs.poi.ooxml)
 }
 
 sourceSets {
