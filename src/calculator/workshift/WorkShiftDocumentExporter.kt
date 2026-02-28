@@ -1,13 +1,6 @@
 package calculator.workshift
 
-import org.apache.poi.ss.usermodel.Cell
-import org.apache.poi.ss.usermodel.CellStyle
-import org.apache.poi.ss.usermodel.FillPatternType
-import org.apache.poi.ss.usermodel.HorizontalAlignment
-import org.apache.poi.ss.usermodel.IndexedColors
-import org.apache.poi.ss.usermodel.Row
-import org.apache.poi.ss.usermodel.Sheet
-import org.apache.poi.ss.usermodel.VerticalAlignment
+import org.apache.poi.ss.usermodel.*
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.ByteArrayOutputStream
 
@@ -17,19 +10,7 @@ class WorkShiftDocumentExporter {
     return XSSFWorkbook().use { workbook ->
       val sheet = workbook.createSheet("Робочі зміни")
 
-      val headerFont = workbook.createFont().apply {
-        fontHeightInPoints = 14
-        bold = true
-      }
-
-      val headerStyle = workbook.createCellStyle().apply {
-        setFont(headerFont)
-        alignment = HorizontalAlignment.CENTER
-        verticalAlignment = VerticalAlignment.CENTER
-
-        fillForegroundColor = IndexedColors.AQUA.index
-        fillPattern = FillPatternType.SOLID_FOREGROUND
-      }
+      val headerStyle = createHeaderCellStyle(workbook)
 
       buildHeader(sheet, headerStyle)
       buildBody(sheet, items)
@@ -42,6 +23,23 @@ class WorkShiftDocumentExporter {
         output.toByteArray()
       }
     }
+  }
+
+  private fun createHeaderCellStyle(workbook: XSSFWorkbook): CellStyle {
+    val headerFont = workbook.createFont().apply {
+      fontHeightInPoints = 14
+      bold = true
+    }
+
+    val headerStyle = workbook.createCellStyle().apply {
+      setFont(headerFont)
+      alignment = HorizontalAlignment.CENTER
+      verticalAlignment = VerticalAlignment.CENTER
+
+      fillForegroundColor = IndexedColors.AQUA.index
+      fillPattern = FillPatternType.SOLID_FOREGROUND
+    }
+    return headerStyle
   }
 
   private fun buildHeader(sheet: Sheet, cellStyle: CellStyle) = sheet.row(0) {

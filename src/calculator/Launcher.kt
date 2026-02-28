@@ -44,7 +44,6 @@ fun startServer() = Server(
   start()
 }
 
-
 fun main() {
   Config.useEnvFile()
   startServer()
