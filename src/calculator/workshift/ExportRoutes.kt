@@ -13,14 +13,16 @@ class ExportRoutes(
   private val repo: WorkShiftRepository,
   private val exporter: WorkShiftDocumentExporter
 ) {
+
   @GET
   fun export(
     @QueryParam("from") from: LocalDate,
     @QueryParam("to") to: LocalDate,
     e: HttpExchange
   ) {
-    val items = repo.listByRange(from, to).filter { it.included }
-    val bytes = exporter.export(items)
+    val items = repo.listByRangeWithIncluded(from, to)
+    val body = exporter.export(items)
+
     val fileName = "Звіт_з_${from}_по_${to}.xlsx"
     val encodedFileName = URLEncoder.encode(fileName, Charsets.UTF_8)
 
@@ -28,6 +30,6 @@ class ExportRoutes(
       "Content-Disposition",
       "attachment; filename=\"report.xlsx\"; filename*=UTF-8''$encodedFileName"
     )
-    e.send(StatusCode.OK, bytes, EXCEL_CONTENT_TYPE)
+    e.send(StatusCode.OK, body, EXCEL_CONTENT_TYPE)
   }
 }
