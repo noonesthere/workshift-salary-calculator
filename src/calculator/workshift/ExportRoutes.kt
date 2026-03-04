@@ -21,9 +21,9 @@ class ExportRoutes(
     e: HttpExchange
   ) {
     val items = repo.listByRangeWithIncluded(from, to)
-    val body = exporter.export("$from - $to", items)
+    val body = exporter.export("${from.asString()} - ${to.asString()}", items)
 
-    val fileName = "Звіт_з_${from}_по_${to}.xlsx"
+    val fileName = "Звіт_з_${from.asString()}_по_${to.asString()}.xlsx"
     val encodedFileName = URLEncoder.encode(fileName, Charsets.UTF_8)
 
     e.header(

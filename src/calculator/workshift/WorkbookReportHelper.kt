@@ -138,7 +138,7 @@ private enum class WorkShiftTableColumns(
   val header: String,
   val extractor: (WorkShift) -> Any
 ) {
-  START_DATE(0, "Дата", { it.startDate }),
+  START_DATE(0, "Дата", { it.startDate.asString() }),
   BEGIN_AT(1, "Початок зміни", { it.beginAt }),
   FINISH_AT(2, "Час завершення", { it.finishedAt }),
   BID(3, "Ставка(грн/год)", { it.bid }),
