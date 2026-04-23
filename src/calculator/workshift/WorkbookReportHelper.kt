@@ -143,5 +143,6 @@ private enum class WorkShiftTableColumns(
   FINISH_AT(2, "Час завершення", { it.finishedAt }),
   BID(3, "Ставка(грн/год)", { it.bid }),
   WORKED_HOURS(4, "Відпрацьовано(год)", { it.workedHours }),
-  SALARY(5, "Зароблено за зміну(грн)", { it.workShiftSalary });
+  BONUS(5, "Бонус(грн)", { it.bonus }),
+  SALARY(6, "Зароблено за зміну(грн)", { it.workShiftSalary });
 }

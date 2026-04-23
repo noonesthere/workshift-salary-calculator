@@ -17,3 +17,6 @@ create table work_shift
 
 create index idx_work_shift_start_date
   on work_shift (start_date);
+
+--changeset dzlobenets:create_work_shift_bonus
+alter table work_shift add bonus decimal(6, 2) not null default 0.0;

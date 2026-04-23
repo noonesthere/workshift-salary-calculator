@@ -5,9 +5,9 @@ export type Entity<T extends Entity<T>> = {id: Id<T>}
 // class calculator.workshift.PatchBody
 export interface PatchBody {included: boolean}
 // class calculator.workshift.WorkShift
-export interface WorkShift {beginAt: LocalTime; bid: number; finishedAt: LocalTime; id: TSID<WorkShift>; included: boolean; startDate: LocalDate; workShiftSalary: number; workedHours: number}
+export interface WorkShift {beginAt: LocalTime; bid: number; bonus: number; finishedAt: LocalTime; id: TSID<WorkShift>; included: boolean; startDate: LocalDate; workShiftSalary: number; workedHours: number}
 // class calculator.workshift.WorkShiftTableColumns
-export enum WorkShiftTableColumns {START_DATE = 'START_DATE', BEGIN_AT = 'BEGIN_AT', FINISH_AT = 'FINISH_AT', BID = 'BID', WORKED_HOURS = 'WORKED_HOURS', SALARY = 'SALARY'}
+export enum WorkShiftTableColumns {START_DATE = 'START_DATE', BEGIN_AT = 'BEGIN_AT', FINISH_AT = 'FINISH_AT', BID = 'BID', WORKED_HOURS = 'WORKED_HOURS', BONUS = 'BONUS', SALARY = 'SALARY'}
 
 // java.time.LocalDate
 export type LocalDate = `${number}-${number}-${number}`

@@ -7,6 +7,7 @@
   let beginAt: string = $state("");
   let finishedAt: string = $state("");
   let bid: number = $state(0);
+  let bonus: number = $state(0);
 
   let workedHours = $derived(() => {
     if (!beginAt || !finishedAt) return 0;
@@ -20,7 +21,7 @@
     return diff / 60;
   });
 
-  let workShiftSalary: number = $derived(bid * workedHours());
+  let workShiftSalary: number = $derived(bid * workedHours() + bonus);
 
   function calculateHours(): number {
     if (beginAt && finishedAt) {
@@ -59,6 +60,7 @@
       bid,
       workedHours: workedHours(),
       workShiftSalary,
+      bonus: bonus
     };
 
     onSave(payload);
@@ -127,6 +129,21 @@
           type="number"
           step="0.01"
           bind:value={bid}
+          placeholder="0"
+          class="w-full rounded-xl border-gray-300 focus:border-primary-500 focus:ring-primary-500"
+        />
+      </div>
+
+      <!-- Bonus -->
+      <div class="space-y-2">
+        <label for="bonus" class="text-sm font-medium text-gray-700">
+          Бонус (грн)
+        </label>
+        <input
+          id="bonus"
+          type="number"
+          step="0.01"
+          bind:value={bonus}
           placeholder="0"
           class="w-full rounded-xl border-gray-300 focus:border-primary-500 focus:ring-primary-500"
         />

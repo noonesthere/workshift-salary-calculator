@@ -40,7 +40,7 @@
 
     <!-- Middle -->
     <div class="text-xs text-gray-600 text-center">
-      {shift.workedHours.toFixed(2)} год × {shift.bid} грн
+      {shift.workedHours.toFixed(2)} год × {shift.bid} грн + {shift.bonus} грн
     </div>
 
     <!-- Right -->

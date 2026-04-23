@@ -46,7 +46,8 @@ object WorkShiftDataGenerator {
       bid = bid,
       workedHours = workedHours,
       workShiftSalary = salary,
-      included = true
+      included = true,
+      bonus = Decimal("0.0")
     )
   }
 }
