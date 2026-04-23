@@ -41,7 +41,13 @@
     }
   }
 
-  function onSaved(): void {}
+  function onSaved(): void {
+    startDate= "";
+    beginAt = "";
+    finishedAt= "";
+    bid = 0;
+    bonus = 0;
+  }
 
   function parseTimeToMinutes(time: string): number {
     const [h, m] = time.split(":").map(Number);
@@ -64,6 +70,7 @@
     };
 
     onSave(payload);
+    onSaved();
   }
 </script>
 
